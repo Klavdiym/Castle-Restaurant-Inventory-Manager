@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="default_text_color">#3F51B5</color>
+
+    <color name="error_msg_text_color">@android:color/holo_red_dark</color>
+
+    <color name="out_off_stock_color">@android:color/holo_red_light</color>
+
+    <color name="free_item_color">@android:color/holo_green_light</color>
+    <color name="background_details_linear_layout">@android:color/white</color>
+    <color name="not_out_off_stock_color">#FAFAFA</color>
+
+</resources>

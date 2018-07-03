@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.lordi.restaurantcastlesuppliesmanager">
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/iconforapp"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".views.CatalogActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".views.EditorActivity"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".views.CatalogActivity"/>
+
+        </activity>
+
+        <activity android:name=".notes.NoteListActivity"
+            android:label="Note List"
+            android:theme="@style/AppTheme2"/>
+        <activity android:name=".notes.NoteDetailActivity"
+            android:label="Note List" />
+
+
+
+        <provider
+            android:name="com.example.lordi.restaurantcastlesuppliesmanager.database.contentProvider.ProductProvider"
+            android:authorities="com.example.lordi.restaurantcastlesuppliesmanager.database.contentProvider.ProductProvider"
+            android:exported="false" />
+
+        <provider
+            android:name="com.example.lordi.restaurantcastlesuppliesmanager.notes.data.NotesContentProvider"
+            android:authorities="com.example.lordi.restaurantcastlesuppliesmanager.notes.data.NotesContentProvider"
+            android:label="NotesProvider"
+            android:exported="false" />
+    </application>
+
+</manifest>

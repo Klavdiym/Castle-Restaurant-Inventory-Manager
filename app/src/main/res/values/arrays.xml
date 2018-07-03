@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <array name="spinner_search">
+        <item>@string/spinner_label_search</item>
+        <item>@string/spinner_label_search_for_name</item>
+        <item>@string/spinner_label_search_for_supplier</item>
+        <item>@string/spinner_label_search_for_code</item>
+        <item>@string/spinner_label_search_for_category</item>
+        <item>@string/spinner_label_search_for_out_of_stock</item>
+    </array>
+
+    <array name="default_order_by">
+        <item>@string/spinner_label_order_by_default</item>
+        <item>@string/spinner_label_id</item>
+        <item>@string/spinner_label_name</item>
+        <item>@string/spinner_label_category</item>
+        <item>@string/spinner_label_price_lowest_first</item>
+        <item>@string/spinner_label_price_highest_first</item>
+        <item>@string/spinner_label_price_more_than</item>
+        <item>@string/spinner_label_price_less_than</item>
+        <item>@string/spinner_label_quantity_lowest_first</item>
+        <item>@string/spinner_label_quantity_highest_first</item>
+        <item>@string/spinner_label_quantity_more_than</item>
+        <item>@string/spinner_label_quantity_less_than</item>
+    </array>
+
+</resources>

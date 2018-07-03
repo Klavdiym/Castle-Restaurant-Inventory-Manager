@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="4dp"
+    tools:context=".views.EditorActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="4dp">
+
+
+    <LinearLayout
+        style="@style/details_linear_layouts_style">
+
+        <TextView
+            style="@style/labels_text_views_style"
+            android:text="@string/name_of_the_product" />
+
+        <EditText
+            android:id="@+id/input_name"
+            style="@style/edit_text_style"
+            android:layout_gravity="center_horizontal"
+            android:hint="@string/enter_product_name"
+            android:inputType="text"
+            android:maxLength="30" />
+
+        <TextView
+            android:id="@+id/error_msg_name"
+            style="@style/error_msg_text_views_style"
+            tools:text="@string/error_text" />
+    </LinearLayout>
+
+        <LinearLayout
+            style="@style/details_linear_layouts_style">
+
+            <TextView
+                style="@style/labels_text_views_style"
+                android:text="@string/unique_product_inventory_code" />
+
+            <EditText
+                android:id="@+id/input_code"
+                style="@style/edit_text_style"
+                android:layout_gravity="center_horizontal"
+                android:hint="@string/enter_unique_inventory_product_identificator"
+                android:inputType="text"
+                android:maxLength="30" />
+
+            <TextView
+                android:id="@+id/error_msg_code"
+                style="@style/error_msg_text_views_style"
+                tools:text="@string/error_text" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/details_linear_layouts_style">
+
+            <TextView
+                style="@style/labels_text_views_style"
+                android:text="@string/product_category" />
+
+            <EditText
+                android:id="@+id/input_category"
+                style="@style/edit_text_style"
+                android:layout_gravity="center_horizontal"
+                android:hint="@string/enter_category_of_the_product"
+                android:inputType="text"
+                android:maxLength="30" />
+
+            <TextView
+                android:id="@+id/error_msg_category"
+                style="@style/error_msg_text_views_style"
+                tools:text="@string/error_text" />
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/details_linear_layouts_style">
+
+            <TextView
+                style="@style/labels_text_views_style"
+                android:text="@string/price_for_one_item_count_of_the_product" />
+
+            <EditText
+                android:id="@+id/input_price"
+                style="@style/edit_text_style"
+                android:layout_gravity="center_horizontal"
+                android:hint="@string/enter_price_for_one_item_count_of_the_product"
+                android:inputType="number"
+                android:maxLength="30" />
+
+            <TextView
+                android:id="@+id/error_msg_price"
+                style="@style/error_msg_text_views_style"
+                tools:text="@string/error_numeric_value" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/details_linear_layouts_style">
+
+            <TextView
+                style="@style/labels_text_views_style"
+                android:text="@string/current_quantity_of_the_product" />
+
+            <ImageButton
+                android:id="@+id/edit_quantity_increase"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:background="@drawable/ic_action_add"/>
+
+            <EditText
+                android:id="@+id/input_quantity"
+                style="@style/edit_text_style"
+                android:layout_gravity="center_horizontal"
+                android:hint="@string/current_quantity"
+                android:inputType="number"
+                android:maxLength="30" />
+
+            <ImageButton
+                android:id="@+id/edit_quantity_decrease"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:background="@drawable/ic_action_minus"/>
+
+            <TextView
+                android:id="@+id/error_msg_quantity"
+                style="@style/error_msg_text_views_style"
+                tools:text="@string/error_numeric_value" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/details_linear_layouts_style">
+
+            <TextView
+                style="@style/labels_text_views_style"
+                android:text="@string/name_of_the_supplier" />
+
+            <EditText
+                android:id="@+id/input_supplier_name"
+                style="@style/edit_text_style"
+                android:layout_gravity="center_horizontal"
+                android:hint="@string/enter_supplier"
+                android:inputType="text"
+                android:maxLength="30" />
+
+            <TextView
+                android:id="@+id/error_msg_supplier_name"
+                style="@style/error_msg_text_views_style"
+                tools:text="@string/error_text" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/details_linear_layouts_style">
+
+            <TextView
+                style="@style/labels_text_views_style"
+                android:text="@string/supplier_phone" />
+
+            <EditText
+                android:id="@+id/input_supplier_phone"
+                style="@style/edit_text_style"
+                android:layout_gravity="center_horizontal"
+                android:hint="@string/supplier_phone"
+                android:inputType="phone"
+                android:maxLength="15" />
+
+            <ImageButton
+                android:id="@+id/phoneButton"
+                android:layout_width="51dp"
+                android:layout_height="41dp"
+                android:layout_gravity="end"
+                android:background="@drawable/callicon" />
+
+            <TextView
+                android:id="@+id/error_msg_supplier_phone"
+                style="@style/error_msg_text_views_style"
+                tools:text="@string/error_supp_phone" />
+        </LinearLayout>
+
+        <TextView
+            style="@style/labels_text_views_style"
+            android:paddingStart="@dimen/padding_margin_value2"
+            android:text="@string/label_image" />
+
+        <LinearLayout
+            style="@style/details_linear_layouts_style"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/image1"
+                style="@style/image_views_style"
+                android:contentDescription="@string/click_to_change_the_image" />
+
+            <ImageView
+                android:id="@+id/image2"
+                style="@style/image_views_style"
+                android:contentDescription="@string/click_to_change_the_image" />
+
+            <ImageView
+                android:id="@+id/image3"
+                style="@style/image_views_style"
+                android:contentDescription="@string/click_to_change_the_image" />
+
+        </LinearLayout>
+
+        <!-- product description label , edit text and error msg -->
+        <LinearLayout style="@style/details_linear_layouts_style">
+
+            <TextView
+                style="@style/labels_text_views_style"
+                android:text="@string/desc_product" />
+
+            <EditText
+                android:id="@+id/input_description"
+                style="@style/edit_text_style"
+                android:layout_gravity="center_horizontal"
+                android:height="@dimen/description_edit_text_height"
+                android:hint="@string/enter_short_description"
+                android:inputType="text"
+                android:maxLength="1000"
+                android:singleLine="false" />
+
+            <TextView
+                android:id="@+id/error_msg_description"
+                style="@style/error_msg_text_views_style"
+                tools:text="@string/desc_error" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

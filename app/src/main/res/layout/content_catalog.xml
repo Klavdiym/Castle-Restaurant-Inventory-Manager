@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/list_item_border">
+
+    <TextView
+        android:id="@+id/count_rows_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="#1B5E20"
+        android:textSize="16sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@string/currently_rows" />
+
+    <LinearLayout
+        android:id="@+id/frame1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/count_rows_text_view">
+
+        <TextView
+            style="@style/queries_layout_items"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/spinner_summary"
+            android:textColor="#1B5E20"
+            android:textSize="14sp" />
+
+        <!--spinner for order by/search for  -->
+        <Spinner
+            android:id="@+id/spinner_order_search"
+            style="@style/queries_layout_items"
+            android:gravity="center"
+            android:text="@string/spinner_summary"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/default_texts_size" />
+
+        <!-- spinner for order by cases-->
+        <Spinner
+            android:id="@+id/spinner_ordered_by"
+            style="@style/queries_layout_items"
+            android:gravity="center" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/frame2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/frame1">
+
+
+        <!-- for cases wanted user to enter number -->
+        <EditText
+            android:id="@+id/input_number"
+            style="@style/queries_layout_items"
+            android:hint="@string/type_here"
+            android:inputType="number" />
+
+        <!-- for cases wanted user to enter name -->
+        <EditText
+            android:id="@+id/input_name"
+            style="@style/queries_layout_items"
+            android:hint="@string/type_here"
+            android:inputType="text" />
+
+        <!-- to get the user input value when be clicked-->
+        <Button
+            android:id="@+id/btn_show_data"
+            style="@style/queries_layout_items"
+            android:layout_weight="1"
+            android:text="@string/show" />
+    </LinearLayout>
+
+    <!-- to show query items-->
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="365dp"
+        android:layout_margin="@dimen/padding_margin_value"
+        android:layout_marginBottom="8dp"
+        android:clipToPadding="true"
+        android:divider="@null"
+        android:dividerHeight="@dimen/divider_height"
+        android:fitsSystemWindows="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/frame2" />
+
+    <!-- to show msg if there is no items -->
+    <ImageView
+        android:id="@+id/warn_image"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginBottom="164dp"
+        android:src="@drawable/empty1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <TextView
+        android:id="@+id/empty_text_view"
+        style="@style/labels_text_views_style"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center_vertical"
+        android:padding="@dimen/padding_margin_value"
+        android:textSize="@dimen/default_texts_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/warn_image"
+        tools:text="@string/empty_text" />
+
+
+</android.support.constraint.ConstraintLayout>

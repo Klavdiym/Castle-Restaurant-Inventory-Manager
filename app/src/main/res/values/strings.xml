@@ -1,0 +1,114 @@
+<resources>
+    <string name="app_name">Restaurant Castle Supplies Manager</string>
+
+    <string name="spinner_label_search">Search for</string>
+    <string name="spinner_label_search_for_name">Search for Name</string>
+    <string name="spinner_label_search_for_supplier">Search for Supplier</string>
+    <string name="spinner_label_search_for_category">Search for Category</string>
+    <string name="spinner_label_search_for_code">Search for Code</string>
+    <string name="spinner_label_search_for_out_of_stock">Search for Supplies Out of Stock</string>
+
+    <string name="spinner_label_order_by_default">Default</string>
+    <string name="spinner_label_id">Id</string>
+    <string name="spinner_label_name">Name</string>
+    <string name="spinner_label_category">Category</string>
+    <string name="spinner_label_price_lowest_first">Price ASC</string>
+    <string name="spinner_label_price_highest_first">Price DESC</string>
+    <string name="spinner_label_price_more_than">Price - more than</string>
+    <string name="spinner_label_price_less_than">Price - less than</string>
+    <string name="spinner_label_quantity_lowest_first">Quantity ASC</string>
+    <string name="spinner_label_quantity_highest_first">Quantity DESC</string>
+    <string name="spinner_label_quantity_more_than">Quantity - more than</string>
+    <string name="spinner_label_quantity_less_than">Quantity - less than</string>
+
+    <string name="send_database_be_email">Send Database be email</string>
+    <string name="insert_test_data">Insert test data</string>
+    <string name="delete_all_entries_in_the_database">Delete all entries in the database</string>
+    <string name="save_supply_entry">Save Supply Entry</string>
+    <string name="delete_this_entry">Delete this entry</string>
+    <string name="fill_editor_with_test_data">Fill Editor with test data</string>
+    <string name="id">ID</string>
+    <string name="category">Category</string>
+
+    <string name="spinner_summary">Data shown as</string>
+    <string name="currently_rows">Currently [ %d ] products in the database</string>
+
+    <string name="no_data_for_input_value_msg">No product entries in the inventory. Add some by tapping the button with the plus sign in the corner</string>
+    <string name="show">Show</string>
+    <string name="type_here">Type here</string>
+    <string name="name_of_the_product">Name of the product</string>
+    <string name="enter_product_name">Enter product name</string>
+
+    <string name="error_text">%s must begin with a letter and length %d - %d\n
+    No spaces or special characters allowed</string>
+    <string name="unique_product_inventory_code">Unique Product Inventory Code</string>
+    <string name="enter_unique_inventory_product_identificator">Enter unique inventory product identificator</string>
+    <string name="enter_category_of_the_product">Enter Category of the product</string>
+    <string name="product_category">Product Category</string>
+    <string name="price_for_one_item_count_of_the_product">Price for one item/count of the product</string>
+    <string name="enter_price_for_one_item_count_of_the_product">Enter price for one item/count of the product</string>
+
+    <string name="error_numeric_value">The %s can not be null, but can be 0</string>
+    <string name="current_quantity_of_the_product">Current quantity of the product</string>
+    <string name="current_quantity">Current quantity</string>
+    <string name="name_of_the_supplier">Name of the supplier</string>
+    <string name="enter_supplier">Enter supplier</string>
+    <string name="supplier_phone">Supplier Phone</string>
+
+    <string name="error_supp_phone">Phone number length must be %d - %d</string>
+    <string name="enter_short_description">Enter short description</string>
+    <string name="desc_product">Description of the product</string>
+    <string name="desc_error">Description should not be longer than 1000 characters</string>
+    <string name="click_to_change_the_image">Click to change the image:</string>
+
+    <string name="label_image">Product related Images: </string>
+
+    <string name="out_of_stock">Out of stock</string>
+    <string name="free_item">Free</string>
+
+    <string name="error_with_saving_product"> Important values are missed check entered values again please </string>
+    <string name="product_saved_with_row"> Product saved successfully @id = </string>
+    <string name="product_deleted_with_row"> Product deleted successfully </string>
+    <string name="error_displaying_data"> Please check Logs, Cannot display this data due to invalid uri :</string>
+    <string name="error_inserting_data"> Please check Logs, Cannot insert data. The uri : </string>
+    <string name="error_deleting_data"> Please check Logs, Cannot delete these items : </string>
+    <string name="repeated_input_value"> this %s already entered before @id = %d</string>
+    <string name="invalid_input_user_catalog_activity"> invalid value you should enter numbers up to %s digits</string>
+    <string name="all_items_deleted"> :rows had been Deleted </string>
+
+    <string name="empty_text_msg">No products in the inventory. Press button with the plus sign to add items</string>
+    <string name="put_value_text_msg">Please, Enter a value then click show button\nto display the
+        data\nor choose other choice to display the data</string>
+    <string name="spinner_label_order_by">order by</string>
+
+    <string name="delete_all_items_dialog_msg">You are about to delete all items in the inventory/database
+        \nContinue?</string>
+
+    <string name="made_by_klavdii_maskenkov_lordicode">Made by: Klavdii Maskenkov (LordiCode)</string>
+
+    <string name="discard">Discard</string>
+    <string name="keep_editing">Keep Editing</string>
+    <string name="save_changes">Save changes</string>
+
+
+    <string name="update_product">Update Id # </string>
+    <string name="details_product">Product # </string>
+    <string name="add_product">Add product # </string>
+    <string name="delete_one_item_dialog_msg">This product entry will be deleted from the database \nContinue?</string>
+    <string name="error_description">Description cannot be longer than 1000 characters</string>
+    <string name="error_operation">Illegal operation</string>
+
+
+    <string name="unsaved_changes_dialog_msg">Discard your changes and quit editing?</string>
+    <string name="save_changes_dialog_msg">Some fields were updated.\nSave?</string>
+    <string name="action_delete_last_row">Delete this item</string>
+    <string name="empty_text">No product entries in the inventory. Add some by tapping the button with the plus sign in the corner</string>
+    <string name="_9c39a5c2_14d8_4a7d_96fa_f19da5f958da">9c39a5c2–14d8–4a7d-96fa-f19da5f958da</string>
+    <string name="sample_title">Sample Title</string>
+    <string name="q">Q:</string>
+
+
+    <string name="quantity_cannot_be_empty">Quantity cannot be empty</string>
+    <string name="quantity_cannot_be_less_0">Negative amounts not allowed</string>
+
+</resources>
