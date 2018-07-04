@@ -13,6 +13,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -33,9 +34,12 @@ import com.example.lordi.restaurantcastlesuppliesmanager.R;
 import com.example.lordi.restaurantcastlesuppliesmanager.adapter.ProductCursorAdapter;
 import com.example.lordi.restaurantcastlesuppliesmanager.database.contract.ProductContract.ProductEntry;
 import com.example.lordi.restaurantcastlesuppliesmanager.database.presenter.ProductDbQuery;
+import com.example.lordi.restaurantcastlesuppliesmanager.flowingnavigationdrawer.MenuListFragment;
 import com.example.lordi.restaurantcastlesuppliesmanager.notes.NoteListActivity;
 import com.example.lordi.restaurantcastlesuppliesmanager.utils.ProductUtility;
 import com.example.lordi.restaurantcastlesuppliesmanager.utils.ScreenSizeUtility;
+import com.mxn.soul.flowingdrawer_core.ElasticDrawer;
+import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
 
 import java.lang.reflect.Method;
 import java.util.Objects;
@@ -46,7 +50,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-//big thanks for the suggestions to the udacity discussion forums
+
 public class CatalogActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
     @BindView(R.id.warn_image)
@@ -119,7 +123,7 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
     private String selection;
     private String moreOrLessSign;
     private String sortOrder;
-
+    private FlowingDrawer mDrawer;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -136,6 +140,11 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
         ButterKnife.bind(this);
         cursorAdapter = new ProductCursorAdapter(this, null);
         listView.setAdapter(cursorAdapter);
+        //this set ups library's navigation drawer with fancy animation
+        mDrawer = (FlowingDrawer) findViewById(R.id.drawerlayout);
+        mDrawer = (FlowingDrawer) findViewById(R.id.drawerlayout);
+        mDrawer.setTouchMode(ElasticDrawer.TOUCH_MODE_BEZEL);
+        //end
         productUtility = new ProductUtility();
         productDbQuery = new ProductDbQuery(this);
         screenSizeUtility = new ScreenSizeUtility(this);
@@ -148,7 +157,8 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
             }
         });
         setUI();
-
+        setupMenu();
+//TODO: SEND DATABASE BY EMAIL, IF NOTE TITLE MATCHES PRODUCT NAME CHANGE, NAVIGATION DRAWER WITH FANCY ANIMATION (DELETE ALL UNNEEDED CODE FROM THE SAMPLE APP AND THEN COPY)
         getLoaderManager().initLoader(ProductUtility.ZERO, null, this);
 
         FloatingActionButton notesFab = findViewById(R.id.notesFab);
@@ -195,6 +205,16 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
         setFab();
         setInputFieldVisibility(); // to hide it tell user want to enter some values to show certain queries
         setViewsMode(productUtility.DEFAULT_MODE); // as default mode
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationIcon(R.drawable.ic_menu_white);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDrawer.toggleMenu();
+            }
+        });
     }
 
     /**
@@ -527,5 +547,37 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
         inputNumber.setVisibility(View.GONE); // as default state till user choose  price/quantity  more/less than value
         inputText.setVisibility(View.GONE);
         showData.setVisibility(View.GONE);
+    }
+
+    private void setupMenu() {
+        FragmentManager fm = getSupportFragmentManager();
+        MenuListFragment mMenuFragment = (MenuListFragment) fm.findFragmentById(R.id.id_container_menu);
+        if (mMenuFragment == null) {
+            mMenuFragment = new MenuListFragment();
+            fm.beginTransaction().add(R.id.id_container_menu, mMenuFragment).commit();
+        }
+
+//        mDrawer.setOnDrawerStateChangeListener(new ElasticDrawer.OnDrawerStateChangeListener() {
+//            @Override
+//            public void onDrawerStateChange(int oldState, int newState) {
+//                if (newState == ElasticDrawer.STATE_CLOSED) {
+//                    Log.i("MainActivity", "Drawer STATE_CLOSED");
+//                }
+//            }
+//
+//            @Override
+//            public void onDrawerSlide(float openRatio, int offsetPixels) {
+//                Log.i("MainActivity", "openRatio=" + openRatio + " ,offsetPixels=" + offsetPixels);
+//            }
+//        });
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (mDrawer.isMenuVisible()) {
+            mDrawer.closeMenu();
+        } else {
+            super.onBackPressed();
+        }
     }
 }

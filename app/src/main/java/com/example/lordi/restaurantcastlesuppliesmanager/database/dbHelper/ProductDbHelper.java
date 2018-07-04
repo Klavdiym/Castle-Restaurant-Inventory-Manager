@@ -9,7 +9,7 @@ import com.example.lordi.restaurantcastlesuppliesmanager.utils.ProductUtility;
 
 import static com.example.lordi.restaurantcastlesuppliesmanager.database.contract.ProductContract.ProductEntry.TABLE_NAME;
 
-//big thanks for the suggestions to the udacity discussion forums to make query like this
+
 public class ProductDbHelper extends SQLiteOpenHelper {
     private static final String Db_NAME = "products.db";
     private static final int Db_VERSION = 1;

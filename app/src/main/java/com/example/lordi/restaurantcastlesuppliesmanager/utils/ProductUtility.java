@@ -11,7 +11,7 @@ import com.example.lordi.restaurantcastlesuppliesmanager.database.contract.Produ
 
 import java.util.Random;
 
-//Big thanks to the InventoryApp-Master creator on showing how to neatly organize database/calls and packages
+
 public class ProductUtility {
 
     private static final String DUMMY_SUPPLIER_PHONE = "0100111100";

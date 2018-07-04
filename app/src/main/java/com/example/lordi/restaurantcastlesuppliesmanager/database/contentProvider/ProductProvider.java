@@ -18,8 +18,7 @@ import com.example.lordi.restaurantcastlesuppliesmanager.database.contract.Produ
 
 import java.util.Objects;
 
-//Big thanks to the InventoryApp-Master creator on showing how to neatly organize database/calls and packages
-//big thanks for the suggestions to the udacity discussion forums
+
 public class ProductProvider extends ContentProvider {
     /**
      * Tag for the log messages

@@ -8,7 +8,7 @@ import android.net.Uri;
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 
-//Big thanks to the InventoryApp-Master creator on showing how to neatly organize database/calls and packages
+
 public class ImageUtility {
 
     /**

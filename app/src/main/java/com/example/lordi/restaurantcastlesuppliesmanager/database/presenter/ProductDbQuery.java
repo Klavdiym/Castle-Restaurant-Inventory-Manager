@@ -10,8 +10,7 @@ import com.example.lordi.restaurantcastlesuppliesmanager.R;
 import com.example.lordi.restaurantcastlesuppliesmanager.database.contract.ProductContract.ProductEntry;
 import com.example.lordi.restaurantcastlesuppliesmanager.utils.ProductUtility;
 
-//Big thanks to the InventoryApp-Master creator on showing how to neatly organize database/calls and packages
-//big thanks for the suggestions to the udacity discussion forums
+
 public class ProductDbQuery {
 
     private final Context context;

@@ -19,5 +19,8 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="app_bar_height">200dp</dimen>
     <dimen name="item_width">200dp</dimen>
+    <dimen name="user_profile_avatar_size">88dp</dimen>
+    <dimen name="global_menu_avatar_size">64dp</dimen>
+    <dimen name="default_elevation">8dp</dimen>
     <dimen name="ic_clear_margin">16dp</dimen>
 </resources>

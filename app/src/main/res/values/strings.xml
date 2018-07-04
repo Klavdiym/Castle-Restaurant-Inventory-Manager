@@ -7,7 +7,7 @@
     <string name="spinner_label_search_for_category">Search for Category</string>
     <string name="spinner_label_search_for_code">Search for Code</string>
     <string name="spinner_label_search_for_out_of_stock">Search for Supplies Out of Stock</string>
-
+    <string name="user_profile_photo">http://baobaoloveyou.com/flowingdrawer_icon.png</string>
     <string name="spinner_label_order_by_default">Default</string>
     <string name="spinner_label_id">Id</string>
     <string name="spinner_label_name">Name</string>
