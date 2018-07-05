@@ -11,11 +11,14 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.StrictMode;
+import android.provider.Settings;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,6 +36,7 @@ import android.widget.Toast;
 import com.example.lordi.restaurantcastlesuppliesmanager.R;
 import com.example.lordi.restaurantcastlesuppliesmanager.adapter.ProductCursorAdapter;
 import com.example.lordi.restaurantcastlesuppliesmanager.database.contract.ProductContract.ProductEntry;
+import com.example.lordi.restaurantcastlesuppliesmanager.database.dbHelper.ProductDbHelper;
 import com.example.lordi.restaurantcastlesuppliesmanager.database.presenter.ProductDbQuery;
 import com.example.lordi.restaurantcastlesuppliesmanager.flowingnavigationdrawer.MenuListFragment;
 import com.example.lordi.restaurantcastlesuppliesmanager.notes.NoteListActivity;
@@ -41,7 +45,12 @@ import com.example.lordi.restaurantcastlesuppliesmanager.utils.ScreenSizeUtility
 import com.mxn.soul.flowingdrawer_core.ElasticDrawer;
 import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.lang.reflect.Method;
+import java.nio.channels.FileChannel;
 import java.util.Objects;
 
 import butterknife.BindInt;
@@ -129,6 +138,12 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_catalog, menu);
+        FragmentManager fm = getSupportFragmentManager();
+        MenuListFragment mMenuFragment = (MenuListFragment) fm.findFragmentById(R.id.id_container_menu);
+        if (mMenuFragment == null) {
+            mMenuFragment = new MenuListFragment();
+            fm.beginTransaction().add(R.id.id_container_menu, mMenuFragment).commit();
+        }
         return true;
     }
 
@@ -141,8 +156,8 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
         cursorAdapter = new ProductCursorAdapter(this, null);
         listView.setAdapter(cursorAdapter);
         //this set ups library's navigation drawer with fancy animation
-        mDrawer = (FlowingDrawer) findViewById(R.id.drawerlayout);
-        mDrawer = (FlowingDrawer) findViewById(R.id.drawerlayout);
+        mDrawer = findViewById(R.id.drawerlayout);
+        mDrawer = findViewById(R.id.drawerlayout);
         mDrawer.setTouchMode(ElasticDrawer.TOUCH_MODE_BEZEL);
         //end
         productUtility = new ProductUtility();
@@ -157,7 +172,7 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
             }
         });
         setUI();
-        setupMenu();
+        //setupMenu();
 //TODO: SEND DATABASE BY EMAIL, IF NOTE TITLE MATCHES PRODUCT NAME CHANGE, NAVIGATION DRAWER WITH FANCY ANIMATION (DELETE ALL UNNEEDED CODE FROM THE SAMPLE APP AND THEN COPY)
         getLoaderManager().initLoader(ProductUtility.ZERO, null, this);
 
@@ -205,8 +220,8 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
         setFab();
         setInputFieldVisibility(); // to hide it tell user want to enter some values to show certain queries
         setViewsMode(productUtility.DEFAULT_MODE); // as default mode
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        //setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_menu_white);
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -428,7 +443,7 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
     }
 
     /**
-     * to set fab and toolbar
+     * to set fab
      */
     private void setFab() {
         fab.setOnClickListener(new View.OnClickListener() {
@@ -478,25 +493,44 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
             } else if (mode.equals(deleteAllItems)) {
                 showDiscardMsg(deleteAllItemsMsg, discardMsg, deleteAllItems);
             } else if (mode.equals(emailAllData)) {
+                File sd = Environment.getExternalStorageDirectory();
+                File data = Environment.getDataDirectory();
+                FileChannel source = null;
+                FileChannel destination = null;
+                String currentDBPath = "/data/"+ getPackageName() +"/databases/"+ ProductDbHelper.Db_NAME;
+                String retreivedDBPAth = getDatabasePath(ProductDbHelper.Db_NAME).getPath();
+                String backupDBPath = "/storage/extSdCard/mydatabase";
+                File currentDB = new File(data, currentDBPath);
+                File backupDB = new File(sd, backupDBPath);
+                File retrievedDB = new File(retreivedDBPAth);
+                Log.d("PATHS", " CurrentDB=" +
+                        currentDBPath + "\n\t" + currentDB.getPath() +
+                        "\n\tExists=" + String.valueOf(currentDB.exists()) +
+                        "\nBackup=" + backupDBPath + "\n\t" + backupDB.getPath() +
+                        "\n\tExists=" + String.valueOf(backupDB.exists()) +
+                        "\nRetrieved DB=" + retreivedDBPAth + "\n\t" + retrievedDB.getPath() +
+                        "\n\tExists=" + String.valueOf(retrievedDB.exists())
+                );
+                try {
+                    source = new FileInputStream(currentDB).getChannel();
+                    destination = new FileOutputStream(backupDB).getChannel();
+                    //destination.transferFrom(source, 0, source.size());
+                    source.close();
+                    destination.close();
+                } catch(IOException e) {
+                    e.printStackTrace();
+                    Toast.makeText(this, "Err:"+e, Toast.LENGTH_LONG).show();
+                }
+            }
                 //to escape error because of URI exposure I invoke this lame method, other one with FileProvider a little bit too complex
                 if(Build.VERSION.SDK_INT>=24){
                     try{
                         Method m = StrictMode.class.getMethod("disableDeathOnFileUriExposure");
                         m.invoke(null);
                     }catch(Exception e){
-                        e.printStackTrace();
-                    }
+                        e.printStackTrace(); }
                 }
-                //attempts to send database as an email attachment
-                Intent intent = new Intent(Intent.ACTION_SEND);
-                intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"recipient@domain.com"});
-                intent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
-                intent.putExtra(Intent.EXTRA_TEXT, "Some message text");
-                intent.setType("application/octet-stream");
-                intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(getApplicationContext().getDatabasePath("products.db")));
-                startActivity(Intent.createChooser(intent, "Send e-mail"));
-            }
+
         } else {
             selection = args.getString(productUtility.BUNDLE_KEY_SELECTION);
             selectionArgs = args.getStringArray(productUtility.BUNDLE_KEY_SELECTION_ARGS);
@@ -549,31 +583,18 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
         showData.setVisibility(View.GONE);
     }
 
-    private void setupMenu() {
-        FragmentManager fm = getSupportFragmentManager();
-        MenuListFragment mMenuFragment = (MenuListFragment) fm.findFragmentById(R.id.id_container_menu);
-        if (mMenuFragment == null) {
-            mMenuFragment = new MenuListFragment();
-            fm.beginTransaction().add(R.id.id_container_menu, mMenuFragment).commit();
-        }
-
-//        mDrawer.setOnDrawerStateChangeListener(new ElasticDrawer.OnDrawerStateChangeListener() {
-//            @Override
-//            public void onDrawerStateChange(int oldState, int newState) {
-//                if (newState == ElasticDrawer.STATE_CLOSED) {
-//                    Log.i("MainActivity", "Drawer STATE_CLOSED");
-//                }
-//            }
-//
-//            @Override
-//            public void onDrawerSlide(float openRatio, int offsetPixels) {
-//                Log.i("MainActivity", "openRatio=" + openRatio + " ,offsetPixels=" + offsetPixels);
-//            }
-//        });
-    }
+    //private void setupMenu() {
+     //   FragmentManager fm = getSupportFragmentManager();
+    //    MenuListFragment mMenuFragment = (MenuListFragment) fm.findFragmentById(R.id.id_container_menu);
+     //   if (mMenuFragment == null) {
+    //        mMenuFragment = new MenuListFragment();
+     //       fm.beginTransaction().add(R.id.id_container_menu, mMenuFragment).commit();
+     //   }
+    //}
 
     @Override
     public void onBackPressed() {
+        //if drawer is occupying the screen close it
         if (mDrawer.isMenuVisible()) {
             mDrawer.closeMenu();
         } else {

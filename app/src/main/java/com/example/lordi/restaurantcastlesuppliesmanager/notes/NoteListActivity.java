@@ -42,10 +42,7 @@ import java.util.Objects;
  * item details. On tablets, the activity presents the list of items and
  * item details side-by-side using two vertical panes.
  */
-public class NoteListActivity
-        extends AppCompatActivity
-        implements LoaderManager.LoaderCallbacks<Cursor>
-{
+public class NoteListActivity         extends AppCompatActivity         implements LoaderManager.LoaderCallbacks<Cursor>{
     /**
      * The unique identifier for the loader
      */
@@ -179,6 +176,7 @@ public class NoteListActivity
 
         // Kick off the data loader for the RecyclerView
         getLoaderManager().initLoader(NOTES_LOADER, null, this);
+
     }
 
     /**

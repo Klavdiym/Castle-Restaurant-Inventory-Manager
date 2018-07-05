@@ -11,7 +11,7 @@ import static com.example.lordi.restaurantcastlesuppliesmanager.database.contrac
 
 
 public class ProductDbHelper extends SQLiteOpenHelper {
-    private static final String Db_NAME = "products.db";
+    public static final String Db_NAME = "products.db";
     private static final int Db_VERSION = 1;
 
     private static final String CREATE_TABLE = "CREATE TABLE ";
