@@ -378,12 +378,12 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         if (modeResourceId.equals(detailsProduct)) {
             setViewsAsMode(detailsProduct, R.drawable.edit, false, false);
         } else if (modeResourceId.equals(updateProduct)) {
-            setViewsAsMode(updateProduct, R.drawable.checkmark, true, false);
+            setViewsAsMode(updateProduct, R.drawable.ic_check_circle, true, false);
             productImage1.setVisibility(View.VISIBLE);
             productImage2.setVisibility(View.VISIBLE);
             productImage3.setVisibility(View.VISIBLE);
         } else { // add new product
-            setViewsAsMode(addProduct, R.drawable.checkmark, true, true);
+            setViewsAsMode(addProduct, R.drawable.ic_check_circle, true, true);
             deleteThisItem.setVisible(false);
         }
     }

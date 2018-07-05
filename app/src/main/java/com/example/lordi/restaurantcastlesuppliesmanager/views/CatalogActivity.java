@@ -14,14 +14,18 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.StrictMode;
 import android.provider.Settings;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.view.GravityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -157,9 +161,12 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
         listView.setAdapter(cursorAdapter);
         //this set ups library's navigation drawer with fancy animation
         mDrawer = findViewById(R.id.drawerlayout);
-        mDrawer = findViewById(R.id.drawerlayout);
         mDrawer.setTouchMode(ElasticDrawer.TOUCH_MODE_BEZEL);
         //end
+        if (Build.VERSION.SDK_INT >= 21) {
+            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
+        }
         productUtility = new ProductUtility();
         productDbQuery = new ProductDbQuery(this);
         screenSizeUtility = new ScreenSizeUtility(this);
@@ -172,8 +179,9 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
             }
         });
         setUI();
-        //setupMenu();
-//TODO: SEND DATABASE BY EMAIL, IF NOTE TITLE MATCHES PRODUCT NAME CHANGE, NAVIGATION DRAWER WITH FANCY ANIMATION (DELETE ALL UNNEEDED CODE FROM THE SAMPLE APP AND THEN COPY)
+
+        setupMenu();
+
         getLoaderManager().initLoader(ProductUtility.ZERO, null, this);
 
         FloatingActionButton notesFab = findViewById(R.id.notesFab);
@@ -185,9 +193,12 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
             }
         });
 
-
     }
 
+    public void addSupplies (View view){
+        Intent intentEditor = new Intent(CatalogActivity.this, EditorActivity.class);
+        startActivity(intentEditor);
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -262,7 +273,10 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     int deletedRows = productDbQuery.deleteAll();
+                    warnImage.setVisibility(View.VISIBLE);
+                    warnImage.setImageResource(R.drawable.empty1);
                     Toast.makeText(getBaseContext(), deletedRows + allItemsDeletedMsg, Toast.LENGTH_LONG).show();
+
                 }
             };
         } else { // discard case - user want to exit
@@ -583,14 +597,14 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
         showData.setVisibility(View.GONE);
     }
 
-    //private void setupMenu() {
-     //   FragmentManager fm = getSupportFragmentManager();
-    //    MenuListFragment mMenuFragment = (MenuListFragment) fm.findFragmentById(R.id.id_container_menu);
-     //   if (mMenuFragment == null) {
-    //        mMenuFragment = new MenuListFragment();
-     //       fm.beginTransaction().add(R.id.id_container_menu, mMenuFragment).commit();
-     //   }
-    //}
+    private void setupMenu() {
+        FragmentManager fm = getSupportFragmentManager();
+       MenuListFragment mMenuFragment = (MenuListFragment) fm.findFragmentById(R.id.id_container_menu);
+        if (mMenuFragment == null) {
+            mMenuFragment = new MenuListFragment();
+            fm.beginTransaction().add(R.id.id_container_menu, mMenuFragment).commit();
+        }
+    }
 
     @Override
     public void onBackPressed() {
@@ -601,4 +615,6 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
             super.onBackPressed();
         }
     }
+
+
 }
